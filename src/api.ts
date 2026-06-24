@@ -90,16 +90,18 @@ export async function updateBooking(id: string, updates: Partial<Booking>): Prom
 }
 
 export async function adminLogin(email: string, password: string): Promise<{ token: string; success: boolean }> {
-  const res = await fetch(`${API_BASE}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.error || "Authentication failed");
+
+  if (
+    email === "sawahjayagroup@gmail.com" &&
+    password === "smartjourney2026"
+  ) {
+    return {
+      token: "admin-demo-token",
+      success: true
+    };
   }
-  return res.json();
+
+  throw new Error("Email atau password salah");
 }
 
 export async function purgeAllBookings(): Promise<void> {

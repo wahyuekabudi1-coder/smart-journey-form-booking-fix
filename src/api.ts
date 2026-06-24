@@ -3,9 +3,11 @@ import { DatabaseState, Trip, Batch, Booking } from "./types";
 const API_BASE = "/api";
 
 export async function fetchDB(): Promise<DatabaseState> {
-  const res = await fetch(`${API_BASE}/db`);
-  if (!res.ok) throw new Error("Failed to load Smart Journey booking database");
-  return res.json();
+  return {
+    trips: [],
+    batches: [],
+    bookings: []
+  };
 }
 
 export async function createTrip(trip: Omit<Trip, "id">): Promise<Trip> {
